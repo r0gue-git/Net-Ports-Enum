@@ -280,4 +280,4 @@ case $choice in
         ;;
 esac
 
-echo "[+] Finished."
+echo "[+] Finished:"
