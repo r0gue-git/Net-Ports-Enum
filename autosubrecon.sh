@@ -25,7 +25,14 @@ ascii_art='''
 '''
 echo -e "${RED} $ascii_art ${NC}"
 
-# Removes subs/ dir if available and create new
+
+### Check if a directory does not exist create new
+# if [ ! -d "subs/" ] 
+# then
+#     echo "[+] Creating subs/ Directory." 
+# 	mkdir -p subs/{active,passive,full}
+#     exit 9999 # die with error code 9999
+# fi
 rm -r subs/
 mkdir subs
 
@@ -75,9 +82,9 @@ finish_work() {
     echo "[+] Combining subdomains and resolving them..."
     cat "subs/"* | sort -u > "subs/all_subs_filtered.txt"
     puredns resolve "subs/all_subs_filtered.txt" -r "wordlist/dns/resolvers-trusted.txt" -w "subs/all_subs_resolved.txt" --skip-wildcard-filter --skip-validation &> /dev/null
-    echo "${YELLOW} Saving  live hosts to subs/filtered_hosts.txt"
+    echo "${YELLOW}[+] Saving  live hosts to subs/filtered_hosts.txt"
 	cat "subs/all_subs_resolved.txt" | httpx -random-agent -retries 2 --silent -o "subs/filtered_hosts.txt"  &> /dev/null
-    echo "${YELLOW} [+] Done with subdomain enumeration!"
+    echo "${YELLOW}[+] Done with subdomain enumeration!"
 }
 
 
@@ -128,6 +135,10 @@ passive_recon() {
 
 	echo "${YELLOW}[+] Enumerating subdomains using Findomain"
 	findomain -t "$target_domain" -u "subs/findomain_Tool.txt" > /dev/null 2>&1
+
+    echo "${YELLOW}[+] Enumerating subdomains using dnsdumpster"
+	curl -s -H "X-API-Key: xxxxxxxx" https://api.dnsdumpster.com/domain/$target_domain |grep -oP "(?<=\")[a-zA-Z0-9.-]+$target_domain" | sort -u > "subs/dnsdumpster_results.txt"
+	
     echo "${YELLOW}[+] That's it, we are done with passive subdomain enumeration!"
 	finish_work
 }
