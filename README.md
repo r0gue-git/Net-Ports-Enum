@@ -10,9 +10,9 @@
     
   How works
   
-          -p1-65535,U:1-65535 tells masscan to scan all TCP/UDP ports
-         --rate=1000 scan rate = 1000 packets per second
-         -e tun0 tells masscan to listen on the VPN network interface for responses
+        -p1-65535,U:1-65535 tells masscan to scan all TCP/UDP ports
+        --rate=1000 scan rate = 1000 packets per second
+        -e tun0 tells masscan to listen on the VPN network interface for responses
          
      If you find masscan is missing ports, try lowering your scan rate to 200-300. This generally is caused by a low quality or low speed connection to the VPN.
      
