@@ -25,7 +25,7 @@ else
  colored_text="${color_code}${figlet_text}${reset_color}"
  echo -e "$colored_text"
 
- echo "${YELLOW}# Coded by Tahir Mujawar${RESET}"
+ echo -e "${YELLOW}# Coded by Tahir Mujawar${RESET}"
  echo
 fi
  
@@ -125,7 +125,7 @@ else
  colored_text="${color_code}${figlet_text}${reset_color}"
  echo -e "$colored_text"
 
- echo "${YELLOW}# Coded by Tahir Mujawar${RESET}"
+ echo -e "${YELLOW}# Coded by Tahir Mujawar${RESET}"
  echo
 fi
 
